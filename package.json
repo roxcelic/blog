@@ -1,0 +1,16 @@
+{
+  "name": "startdust",
+  "type": "module",
+  "version": "1.1.02",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.8.3",
+    "cloudflare-worker-request-data": "^1.0.1"
+  }
+}

@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/full.astro'
+import Image from '../comp/image.astro'
+import Theme from '../comp/theme.astro';
+---
+<Layout desc='Im total not gonna just use this page to vent...' title='blog'>
+    <contents>
+        <div class="top">
+            <div id="menu-container">
+                <div id="menu">
+                    <p><a href="https://roxcelic.love/">home</a></p>
+                    <p>|</p>
+                    <p><a href="/blog/">blog</a></p>
+                    <p>|</p>
+                    <p><a href="https://roxcelic.love/hf/">fun!</a></p>
+                    <p>|</p>
+                    <p><a href="https://roxcelic.love/roxie/">roxie</a></p>
+                </div>
+                <div class="bar" id="holt2"/>
+            </div>
+        </div>
+        <main>
+            <div class="fullcontent">
+                <h3>Hey!</h3>
+                <p>
+                    So basically Ive moved blog posts to a seperate repo and domain, this means that themes will no longer work in tandom with the main site. 
+                    however you can just set a theme here and it will just work across this site. If there is anything youd like to contact
+                    me about feel too!
+                </p>
+            </div>
+            <Theme/>
+        </main>
+    </contents>
+</Layout>

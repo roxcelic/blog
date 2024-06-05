@@ -1,0 +1,103 @@
+<div class="fullcontent">
+    <p>leave blank for defaults - if changed to an improper color, it may not work as intended.</p>
+    <p style="font-size: x-small; margin-top: 0; padding-top: 0;">Sorry for any issues; it's all based around cookies
+        and they interact differently with each browser.<br> Themes also interact differently with different elements imported to the site,
+        some of which might not be able to be themed.
+    </p>
+    <p style="display: inline-block; margin-right: 1vw;">Main color -</p><input placeholder="#333030" id="button1"><br>
+    <p style="display: inline-block; margin-right: 1vw;">Background color -</p><input placeholder="black" id="button3"><br>
+    <p style="display: inline-block; margin-right: 1vw;">Font color -</p><input placeholder="white" id="button4"><br>
+    <p style="display: inline-block; margin-right: 1vw;">Use defaults for cards -</p><input type="checkbox" id="button2"><br>
+    <button id="button">Delete cookies</button>
+</div>
+<script is:inline>
+    /**gets the value of the cookie */
+    function getCookieValue(cookieName) {
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            const c = ca[i].trim();
+            if (c.startsWith(cookieName + '=')) {
+                return c.substring(cookieName.length + 1);
+            }
+        }
+        return null;
+    }
+
+    /**gets the inputs, idk why i called em buttons*/
+    const button = document.getElementById('button');
+    const button1 = document.getElementById('button1');
+    const button2 = document.getElementById('button2');
+    const button3 = document.getElementById('button3');
+    const button4 = document.getElementById('button4');
+
+    /**not too sure what this does actually */
+    button.addEventListener('click', cookieKill);
+
+    /**a reset button */
+    function cookieKill() {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i];
+                const eqPos = cookie.indexOf('=');
+                const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;';
+            }
+
+            /**clears the input values */
+            button1.value = "";
+            button2.checked = false;
+            button3.value = "";
+            button4.value = "";
+
+            /**resets the variables */
+            document.documentElement.style.setProperty('--main-background', '#333030');
+            document.documentElement.style.setProperty('--spotify-color1', '#218f47');
+            document.documentElement.style.setProperty('--spotify-color2', '#1DB954');
+            document.documentElement.style.setProperty('--github-color', '#2b3137');
+            document.documentElement.style.setProperty('--lastfm-color', '#c3000d');
+            document.documentElement.style.setProperty('--background-color', 'black');
+            document.documentElement.style.setProperty('--font-color', 'white');            
+        }
+
+    /**sets the inputs value to the correct color */
+    button1.value = getCookieValue('main-background');
+    button2.checked = JSON.parse(getCookieValue('checked'));
+    button3.value = getCookieValue('background-color');
+    button4.value = getCookieValue('font-color');
+
+    cardschange(button2);
+
+    /**this adds the event listeners so it updates the input continusly */
+    button1.addEventListener('input', (e) => {
+        document.documentElement.style.setProperty('--main-background', e.target.value);
+        document.cookie = "main-background=" + e.target.value;
+    });
+    button2.addEventListener('click', (e) => {
+        cardschange(button2);
+        document.cookie = "checked=" + button2.checked;
+    });
+    button3.addEventListener('input', (e) => {
+        document.documentElement.style.setProperty('--background-color', e.target.value);
+        document.cookie = "background-color=" + e.target.value;
+    });
+    button4.addEventListener('input', (e) => {
+        document.documentElement.style.setProperty('--font-color', e.target.value);
+        document.cookie = "font-color=" + e.target.value;
+    });
+
+    function cardschange(button2){
+        if (button2.checked){
+            document.documentElement.style.setProperty('--spotify-color1', 'var(--main-background)');
+            document.documentElement.style.setProperty('--spotify-color2', 'var(--main-background)');
+            document.documentElement.style.setProperty('--github-color', 'var(--main-background)');
+            document.documentElement.style.setProperty('--lastfm-color', 'var(--main-background)');
+        }
+        else{
+            document.documentElement.style.setProperty('--spotify-color1', '#218f47');
+            document.documentElement.style.setProperty('--spotify-color2', '#1DB954');
+            document.documentElement.style.setProperty('--github-color', '#2b3137');
+            document.documentElement.style.setProperty('--lastfm-color', '#c3000d');
+        }
+    }
+</script>

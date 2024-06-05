@@ -1,0 +1,143 @@
+html{
+    padding: 0;
+    margin: 0;
+    background-color: var(--background-color);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: var(--font-color);
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+pre {
+    background-color: #1a1b19 !important;
+}
+.astro-code {
+    text-align: left;
+}
+code{
+    background-color: #1a1b19;
+    border-radius: 3px;
+}
+body{
+    padding: 0;
+    margin: 0;
+}
+:root{
+    --background-color: black;
+    --main-background: #333030;
+    --main-color: #7c001f;
+    --border-color: white;
+    --font-color: white;
+    --global-padding: 5px;
+    --global-round: 13px;
+    --global-opacity: 0.75;
+
+    /*card colors non important for most people*/
+    --spotify-color1: #218f47;
+    --spotify-color2: #1DB954;
+    --github-color: #2b3137;
+    --lastfm-color: #c3000d;
+}
+button{
+    color: white;
+    background-color: var(--main-background);
+    border-radius: 5px;
+    border-color: var(--main-color);
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: var(--global-round);
+    background: var(--main-background);
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--main-background);
+}
+:link{
+    color: lightgray;
+}
+a:hover{
+    color: var(--font-color);
+    --underline-width: 100%;
+}
+a:active{
+    color: var(--font-color);
+}
+a {
+    background: linear-gradient(currentColor 0 0) bottom left/ var(--underline-width, 0%) 0.1em no-repeat;
+    color: lightgray;
+    text-decoration: none;
+    transition: background-size 0.5s;
+}
+::selection {
+    background: var(--main-color);
+}
+/*transition all*/
+.top, .image, .fullcontent, .parent .child, footer {
+    transition: all ease-in-out 0.3s;
+    box-shadow: 0px 0px 0px transparent;
+}
+/*hover to change opacity*/
+.top:hover, .image:hover, .fullcontent:hover, .parent .child:hover, footer:hover {
+    opacity: 1;
+    animation: colors  7.5s infinite alternate;
+    animation-delay: 0.5s;
+
+}
+
+/*the borders*/
+@media (pointer: coarse) {
+    :root{
+        --global-opacity: 1;
+    }
+    contents{
+        width: 100%;
+        margin-top: 0;
+    }
+    .top:hover, .image:hover, .fullcontent:hover, .parent .child:hover, footer:hover {
+        animation-delay: 0s;
+    }
+    .showoffbrick:hover{
+        height: 20vh;
+        width: 20vh;
+    }
+}
+@keyframes colors{
+    16.67% { border: 2px solid #ffcccc; box-shadow: 5px 5px 2.5px #ffcccc;}
+    33.33% { border: 2px solid #ffcc99; box-shadow: 5px 5px 2.5px #ffcc99;}
+    50% { border: 2px solid #ccffcc; box-shadow: 5px 5px 2.5px #ccffcc;}
+    66.67% { border: 2px solid #99ccff; box-shadow: 5px 5px 2.5px #99ccff;}
+    83.33% { border: 2px solid #ff99cc; box-shadow: 5px 5px 2.5px #ff99cc;}
+    100% { border: 2px solid #ffccff; box-shadow: 5px 5px 2.5px #ffccff;}
+}
+.blogp {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left;
+}
+
+.blogc {
+    flex: 1 1 49%;
+    width: 49%;
+    min-width: fit-content;
+    padding-left: 0.5%;
+}
+
+@media (max-width: 400px) {
+    .blogc {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+}

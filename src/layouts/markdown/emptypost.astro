@@ -1,0 +1,36 @@
+---
+const { frontmatter } = Astro.props;
+
+import Layout from '../full.astro'
+---
+<Layout desc={ frontmatter.desc } title={ frontmatter.title }>
+	<a href="../../blog/"><h1>back</h1></a>
+    <slot/>
+    <button onclick="fullsize('comments')" style="border-color: white;background-color: black;">comments</button>
+    <div id="comments" style="overflow: hidden;height:0px;">
+        <script src="https://giscus.app/client.js"
+        	data-repo="roxcelic/web-home"
+        	data-repo-id="R_kgDOL6k6bA"
+        	data-category="General"
+        	data-category-id="DIC_kwDOL6k6bM4Cfc-n"
+        	data-mapping="url"
+        	data-strict="0"
+        	data-reactions-enabled="1"
+        	data-emit-metadata="0"
+        	data-input-position="top"
+        	data-theme="noborder_gray"
+        	data-lang="en"
+        	crossorigin="anonymous"
+        	async />
+    </div>
+    <script is:inline>
+        function fullsize(id) {
+            let el = document.getElementById(id);
+            if (el.clientHeight === el.scrollHeight) {
+                el.style.height = "0px";
+            } else {
+                el.style.height = "auto";
+            }
+        }
+    </script>
+</Layout>

@@ -1,0 +1,36 @@
+---
+interface Props {
+	title: string;
+    desc: string;
+}
+
+const { desc } = Astro.props;
+const { title } = Astro.props;
+
+import '../res/css/style.css'
+import '../res/css/extra.css'
+import '../res/css/base.css'
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={ desc }/>
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/x-icon" href="https://roxcelic.love/icon.svg">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Pixelify+Sans&display=swap" rel="stylesheet">
+
+
+		<meta name="generator" content={Astro.generator} />
+		<title>{ title }</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+	<script src="../res/js/script.js"/>
+</html>

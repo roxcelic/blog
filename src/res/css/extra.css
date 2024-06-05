@@ -1,0 +1,81 @@
+.icon {
+    width: 10vh;
+    height: 10vh;
+    border: 2px solid white;
+    display: block;
+    margin: auto auto;
+    background-image: none;
+    background-size: cover;
+}
+.lineline {
+    height: 3px;
+    width: 80%;
+    display: block;
+    margin: auto auto;
+    background-color: white;
+}
+.showoffbrick{
+    transition: all ease-in-out 0.3s;
+    display: none;
+    border: 2px solid white;
+    height: 20vh;
+    width: 20vh; 
+    border-radius: var(--global-round);
+    overflow: hidden;
+    background-size: cover;
+
+    .showoffhide{
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(10px);
+
+        .showoffcenter{
+            display: block;
+            height: 50%;
+            width: 50%;
+            top: 50%;
+            left: 50%;
+            border-radius: var(--global-round);
+            transform: translate(50%, 50%);
+            background-color: pink;
+            background-size: cover;
+            transition: all ease-in-out 0.3s;
+        }
+    }
+
+    .showoffcover{
+        font-size: 2vh;
+        text-align: center;
+        position: absolute;
+        bottom: 0;
+        background-color: var(--main-background);
+        width: 100%;
+        height: 0px;
+        transition: all ease-in-out 0.3s;
+        overflow: hidden;
+    }
+    
+}
+.showoffbrick:hover{
+    height: 25vh;
+    width: 25vh;
+}
+
+.popup{
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    background-color: var(--main-color);
+    transition: all ease-in-out 0.3s;
+    border-radius: var(--global-round);
+    box-shadow: var(--main-color);
+    max-height: 60vh;
+    max-width: 80vw;
+    min-width: 60vw;
+    overflow-y: scroll;
+    font-size: medium;
+    border: 2px solid white;
+}
