@@ -31,7 +31,7 @@ const approvedSearches = [
         const errorMessageElement = document.getElementById('errorMessage');
         errorMessageElement.textContent = '';
         if (approvedSearches.includes(searchInput)) {
-            window.location.href = `./filter/${searchInput}`;
+            window.location.href = `../filter/${searchInput}`;
         } else {
             errorMessageElement.textContent = "Error: Invalid search term: "+searchInput;
         }
