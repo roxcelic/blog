@@ -9,7 +9,21 @@ function parseDate(dateString) {
   return new Date(`${year}-${month}-${day}`);
 }
 
-export function getSortedPosts() {
+export function getSortedPosts(searchQuery = '') {
+  if (searchQuery == "chicken nuggies"){
+    return [
+      {
+        id: "rick",
+        title: "government secrets",
+        desc: "shhhhhhh",
+        auth: "[redacted]",
+        tags: ["secret", "..."],
+        upDate: "never",
+        writeDate: "01.01.1899",
+        url: "https://youtu.be/dQw4w9WgXcQ?si=AhaIZFZQuwcuQ6Lf"
+      }
+    ];
+  }
   const fileNames = fs.readdirSync(postsDirectory);
   const allPostsData = fileNames.map((fileName) => {
     const id = fileName.replace(/\.md$/, '');
@@ -23,8 +37,14 @@ export function getSortedPosts() {
       url: `/posts/${id}`
     };
   });
+  const filteredPosts = allPostsData.filter(post => 
+    post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    post.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    post.auth.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (post.tags && post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())))
+  );
 
-  return allPostsData.sort((a, b) => {
+  return filteredPosts.sort((a, b) => {
     const dateA = parseDate(a.upDate);
     const dateB = parseDate(b.upDate);
 
