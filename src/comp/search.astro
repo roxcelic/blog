@@ -18,23 +18,10 @@ const approvedSearches = [
     <p id="errorMessage" class="error-message"></p>
 </div>
 <script is:inline>
-    const approvedSearches = [
-        //terms
-        "school", "music", "calendar", "tech", "website", "android",
-        //authors
-        "roxie",
-        //easteregg
-        "chicken nuggies"
-    ];
     function handleSearch() {
         const searchInput = document.getElementById('searchBox').value.trim();
         const errorMessageElement = document.getElementById('errorMessage');
-        errorMessageElement.textContent = '';
-        if (approvedSearches.includes(searchInput)) {
-            window.location.href = `../filter/${searchInput}`;
-        } else {
-            errorMessageElement.textContent = "Error: Invalid search term: "+searchInput;
-        }
+        window.location.href = `../filter/${searchInput}`;
     }    
     function handleKeyPress(event) {
         if (event.key == 'Enter') {
