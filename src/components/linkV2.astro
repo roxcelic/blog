@@ -1,17 +1,15 @@
 ---
 const { title, desc, url, tags } = Astro.props;
 ---
-<div class="post" id={title+"|"+desc +"|"+ tags.join(", ")}>
-    <div style="padding-bottom: 1vh;">
-        <a href={url}>
-            <li>{title}</li>
-            <ul>
-                <li>{desc}</li>
-                <li>{tags.join(", ")}</li>
-            </ul>
-        </a>
-    </div>
-    <div style="margin-bottom: 2.5vh;background-color: yellow;">
-        <hr>
+<div class="post" id={title + "|" + desc + "|" + tags.join(", ")}>
+    <div style="padding-bottom: 1vh;width:80%;margin-left: 10%;">
+        <a href={url}><h3 style="margin: 0;padding-bottom: 0; text-align: left;">{title}</h3></a>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="margin: 0;">{desc}</p>
+            <p style="margin: 0; text-align: right;">{tags.join(", ")}</p>
+        </div>
+        <div style="margin-bottom: 2.5vh;">
+            <hr>
+        </div>
     </div>
 </div>

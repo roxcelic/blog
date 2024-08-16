@@ -1,11 +1,20 @@
 ---
 import Layout from '../astro/main.astro';
+import PostTitle from '../../components/post-title.astro';
 const { frontmatter } = Astro.props;
 ---
 <Layout desc={ frontmatter.desc } title={ frontmatter.title }>
     <a href="../../" style="background: none;">
         <span class="material-symbols-outlined" style="display: inline;color:palevioletred">arrow_back</span>
+        <h3 style="margin:0;padding:0;margin-top: 1vh;margin-left: 1vh;">
+            back
+        </h3>
     </a>
+    <PostTitle
+        title={frontmatter.title}
+        desc={frontmatter.desc}
+        tags={frontmatter.tags}
+    />
     <slot/>
     <details>
         <summary>comments</summary>
