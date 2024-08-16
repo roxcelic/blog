@@ -1,0 +1,26 @@
+---
+import Layout from '../astro/main.astro';
+import TitleBar from '../../components/title-bar.astro';
+
+
+import Music from '../../components/music.astro';
+import LinkV2 from '../../components/linkV2.astro';
+
+import { getSortedPosts } from '../../lib/posts';
+const posts = getSortedPosts();
+const { frontmatter } = Astro.props;
+---
+<Layout desc={ frontmatter.desc } title={ frontmatter.title }>
+    <TitleBar/>
+    <div class="input-wrapper">
+        <i class="material-symbols-outlined">search</i>
+        <input id="sortInput" placeholder="Search"/>
+    </div>
+    
+    <Music/>
+    <h3 style="text-align: left;margin-top: 20vh;">heres a list of blog posts</h3>
+    <div style="text-align: left;" id="blogposts">
+        <ul>{posts.map((post) => <LinkV2 url={ post.url } title={ post.title } desc={ post.desc }tags={ post.tags }/>)}</ul>
+    </div>
+    <script src="../../res/js/reorder"/>
+</Layout>

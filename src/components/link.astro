@@ -1,0 +1,14 @@
+---
+const { title, url, writedate, tags, update } = Astro.props;
+---
+<div style="opacity:0;position:absolute;">
+    <a href={url} style="display: none;" />
+    <p>{title}</p>
+    -written on: {writedate}- updated on: {update}-<br>
+    - {
+        tags && 
+        <span>
+            {tags.join(", ")}
+        </span>
+    } -
+</div>

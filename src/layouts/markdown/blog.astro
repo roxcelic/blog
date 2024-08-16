@@ -1,0 +1,10 @@
+---
+import Layout from '../astro/main.astro';
+const { frontmatter } = Astro.props;
+---
+<Layout desc={ frontmatter.desc } title={ frontmatter.title }>
+    <a href="../" style="background: none;">
+        <span class="material-symbols-outlined" style="display: inline;color:palevioletred">arrow_back</span>
+    </a>
+    <slot/>
+</Layout>

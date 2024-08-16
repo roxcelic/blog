@@ -1,0 +1,80 @@
+---
+import Link from '../components/link.astro';
+
+import { getSortedPosts } from '../lib/posts';
+const posts2 = getSortedPosts();
+---
+<div style="text-align: center;justify-content:center;position:relative;">
+    <div id="blog-post-contain">
+        {posts2.map((post) => <Link url={ post.url } title={ post.title } dates={ post.upDate } auth={ post.auth } desc={ post.desc } writedate={ post.writeDate } tags={ post.tags } update={ post.upDate }/>)}
+    </div>
+    <hr style="width: 60%;margin-left: 20%;" />
+    <div style="justify-content: space-between;display:flex; width: 40%;margin:auto;">
+        <span class="material-symbols-outlined" style="display: inline;" id="back">skip_previous</span>
+        <span class="material-symbols-outlined" style="display: inline;" id="play">play_arrow</span>
+        <span class="material-symbols-outlined" style="display: inline;" id="forward">skip_next</span>
+    </div>
+</div>
+
+<script is:inline>
+    const parentDiv = document.querySelector('#blog-post-contain');
+    const children = parentDiv.children;
+    let childrenArray = Array.from(children);
+    var active = 0;
+    const play_button = document.getElementById("play");
+    const back_button = document.getElementById("back");
+    const forward_button = document.getElementById("forward");
+
+    play_button.addEventListener("click", play);
+    back_button.addEventListener("click", back);
+    forward_button.addEventListener("click", forward);
+    function back(){
+        if (active - 1 >= 0){
+            active--;
+            setactive();
+        }
+    }
+    function forward(){
+        if (active + 1 <= childrenArray.length - 1){
+            active++;
+            setactive();
+        }
+    }
+    function play(){
+        window.location = childrenArray[active].firstElementChild.href;
+    }
+    function setactive(){
+        childrenArray.forEach(child => {
+            child.style.opacity = "0";
+        });
+        childrenArray[active].style.opacity = "1";
+        update();
+    }
+    function update(){
+        back_button.style.opacity = (active - 1 >= 0) ? "1" : "0.5";
+        forward_button.style.opacity = (active + 1 <= childrenArray.length - 1) ? "1" : "0.5";
+    }
+    document.addEventListener('keydown', (event) => {
+        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.isContentEditable) {
+            return;
+        }
+
+        switch (event.key) {
+            case 'ArrowRight':
+            case 'd':
+                forward();
+                break;
+            case 'ArrowLeft':
+            case 'a':
+                back();
+                break;
+            case 'c':
+            case 'Enter':
+                play();
+                break;
+        }
+    });
+        
+
+    setactive();
+</script>

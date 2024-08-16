@@ -1,0 +1,33 @@
+hr {
+    background-color: white !important;
+    border-color: white !important;
+    padding: 0;
+    margin: 0;
+}
+#blog-post-contain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 15vh;
+}
+.input-wrapper {
+    position: relative;
+    width: calc(100% - 40px);
+}
+
+.input-wrapper input {
+    padding-left: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 30px;
+    width: 100%;
+}
+
+.input-wrapper .material-symbols-outlined {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
