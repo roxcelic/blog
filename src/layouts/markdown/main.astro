@@ -6,7 +6,7 @@ import TitleBar from '../../components/title-bar.astro';
 import Music from '../../components/music.astro';
 import LinkV2 from '../../components/linkV2.astro';
 
-import { getSortedPosts } from '../../lib/posts';
+import { getSortedPosts } from '../../lib/posts.ts';
 const posts = getSortedPosts();
 const { frontmatter } = Astro.props;
 ---

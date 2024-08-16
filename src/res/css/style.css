@@ -4,7 +4,7 @@ hr {
     padding: 0;
     margin: 0;
 }
-#blog-post-contain {
+#blog-post-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
