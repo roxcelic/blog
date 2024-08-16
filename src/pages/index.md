@@ -1,5 +1,5 @@
 ---
 layout: '../layouts/markdown/main.astro'
-title: home
+title: blog
 desc: My blog!
 ---

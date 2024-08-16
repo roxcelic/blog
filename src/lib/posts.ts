@@ -14,8 +14,8 @@ interface PostMetadata {
   url: string;
 }
 
-// Directory where posts are located
-const postsDirectory = path.join(process.cwd(), 'src/pages/posts');
+// Base directory where posts are located
+const postsBaseDirectory = path.join(process.cwd(), 'src/pages/posts');
 
 // Function to parse a date string in DD.MM.YYYY format
 function parseDate(dateString: string): Date {
@@ -23,23 +23,40 @@ function parseDate(dateString: string): Date {
   return new Date(`${year}-${month}-${day}`);
 }
 
-// Function to get sorted posts with optional search query
-export function getSortedPosts(searchQuery: string = ''): PostMetadata[] {
+// Function to recursively find all markdown files in the directory
+function getPostFiles(directory: string): string[] {
+  const files: string[] = [];
 
-  // Read file names from the posts directory
-  const fileNames = fs.readdirSync(postsDirectory);
+  const entries = fs.readdirSync(directory, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...getPostFiles(fullPath)); // Recurse into subdirectories
+    } else if (entry.isFile() && entry.name.endsWith('.md')) {
+      files.push(fullPath); // Add the markdown file path
+    }
+  }
+
+  return files;
+}
+
+// Function to get sorted posts with an optional search query
+export function getSortedPosts(searchQuery: string = ''): PostMetadata[] {
+  // Get all markdown files recursively from the base directory
+  const filePaths = getPostFiles(postsBaseDirectory);
 
   // Extract post data from each file
-  const allPostsData: PostMetadata[] = fileNames.map((fileName: string) => {
-    const id = fileName.replace(/\.md$/, '');
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const allPostsData: PostMetadata[] = filePaths.map((filePath: string) => {
+    const id = path.basename(filePath, '.md');
+    const fileContents = fs.readFileSync(filePath, 'utf8');
     const matterResult = matter(fileContents);
+
+    const relativePath = path.relative(postsBaseDirectory, filePath);
 
     return {
       id,
-      ...(matterResult.data as Omit<PostMetadata, 'id' | 'url'>), // Spread remaining metadata, excluding id and url
-      url: `/posts/${id}`
+      ...(matterResult.data as Omit<PostMetadata, 'id' | 'url'>),
+      url: `/posts/${relativePath.replace(/\.md$/, '')}`
     };
   });
 
