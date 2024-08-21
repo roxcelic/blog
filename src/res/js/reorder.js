@@ -1,6 +1,6 @@
 document.getElementById('sortInput').addEventListener('input', function() {
     let query = this.value.toLowerCase();
-    let container = document.querySelector('#blogposts ul');
+    let container = document.querySelector('#blogposts');
     let posts = Array.from(container.querySelectorAll('.post'));
     posts.sort((a, b) => {
         let aScore = calculateMatchScore(a.id.toLowerCase(), query);
